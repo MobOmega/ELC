@@ -7,7 +7,8 @@ Exploring Lake Country is a Compose Multiplatform application written in Kotlin.
 To run this project, you will need to: 
 1) Download the project into a folder.
 2) Make sure you have the Java 11 JDK and Kotlin Compiler installed.
-3) Run a script depending on your operating system
+3) Permit execution of a script and run it. 
+4) Script name depends on your operating system.
    1) windows.bat for Windows
    2) mac.zsh for MacOS
    3) linux.sh for Linux distributions
