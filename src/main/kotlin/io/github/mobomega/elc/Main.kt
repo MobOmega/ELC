@@ -43,6 +43,7 @@ val sizeHor = Dp(1000f)
 val sizeVer = Dp(750f)
 var tabulated = mutableMapOf<String, Pair<MutableSet<Attraction>, MutableSet<String>>>()
 
+@OptIn(ExperimentalMaterialApi::class)
 fun main() = application {
 
     val composableScope = rememberCoroutineScope()
@@ -92,6 +93,29 @@ fun main() = application {
         MaterialTheme (
             colors = windowColors.copy()
         ) {
+
+            val helpRequest = remember { mutableStateOf(true) }
+            if (helpRequest.value) {
+                AlertDialog(
+                    modifier = Modifier.fillMaxWidth(0.8f),
+                    onDismissRequest = { helpRequest.value = false },
+                    title = { Text(text = "Help") },
+                    text = { Text(text = """
+                                        Welcome to ELC, or Exploring Lake Country. This is a project that allows you to explore attractions and areas in the vicinity of Waukesha County and Lake Country.
+                                        
+                                        To begin, enter desired attributes in the text box, separated by commas. For example, "fun, sports, waukesha".
+                                        
+                                        When you want to search for something else, or add to your results, click reset to clear the selections.
+                                    """.trimIndent())},
+                    buttons = {
+                        Button(modifier = Modifier.fillMaxWidth(),
+                            onClick = { helpRequest.value = false }) {
+                            Text("Dismiss")
+                        }
+                    },
+                    backgroundColor = Color(167, 215, 197, 255)
+                )
+            }
 
             WindowDraggableArea {
 
@@ -290,6 +314,7 @@ fun create(
     }
 
 }
+
 
 fun search(text: String) {
 
