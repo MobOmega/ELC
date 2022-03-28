@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.reflections.Reflections
 import java.net.URL
@@ -58,30 +57,17 @@ fun main() = application {
                 tabulated[sharedTag] = Pair(mutableSetOf(temp), mutableSetOf(temp.name))
             }
 
-//            println("$sharedTag and ${temp.name}")
-
-//            println(tabulated[sharedTag])
-//            println(tabulated[sharedTag]?.first)
-//            println(tabulated[sharedTag]?.first?.plus(temp))
-//            println(tabulated[sharedTag]?.second)
-//            println(tabulated[sharedTag]?.second?.plus(temp.name))
-
             val newPair: Pair<MutableSet<Attraction>, MutableSet<String>> =
                 Pair(
                     tabulated[sharedTag]?.first?.plus(temp),
                     tabulated[sharedTag]?.second?.plus(temp.name)
                 ) as Pair<MutableSet<Attraction>, MutableSet<String>>
-//            println(newPair)
 
             tabulated[sharedTag] = newPair
-
-//            println("current tag $sharedTag is ${tabulated[sharedTag]}")
 
         }
 
     }
-//    println("====================================")
-//    println("tabulated is $tabulated")
 
     println("There are ${reflections.getSubTypesOf(Attraction::class.java).size} attractions.")
 
@@ -99,7 +85,7 @@ fun main() = application {
 
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Search",
+        title = "Exploring Lake Country",
         state = windowState
     ) {
 
@@ -145,7 +131,6 @@ fun main() = application {
 
                                     search(tag.lowercase())
                                     display = mutableDisplay
-//                                println("$display have tag $tag")
 
                                 }
 
@@ -228,9 +213,6 @@ fun textBox(attr: Attraction?, density: Density, windowState: WindowState) {
             contentAlignment = Alignment.Center
         ) {
 
-//            println("Attempting ${attr.name}.")
-//            println(URL(attr.image))
-
             Text(
                 text = "${attr.name}\n${attr.address}\n${attr.stars} out of 5.0 stars",
                 modifier = Modifier.align(Alignment.CenterStart)
@@ -251,8 +233,6 @@ fun textBox(attr: Attraction?, density: Density, windowState: WindowState) {
                     text = attr.source,
                     modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = windowState.size.height.div(30))
                 )
-
-//                println("${attr.name} was successful.")
 
             }
 
@@ -292,8 +272,6 @@ fun create(
 
     Column {
 
-//        var x = 0
-
         if (display.isEmpty() && names.isEmpty()) {
 
             textBox(null, density, windowState)
@@ -302,15 +280,8 @@ fun create(
 
             for (attr in display) {
 
-//                x++
-
                 textBox(attr, density, windowState)
-
-//                if (x < display.size) {
-//
                 Spacer(modifier = Modifier.height(40.dp).align(Alignment.CenterHorizontally))
-//
-//                }
 
             }
 
@@ -322,19 +293,11 @@ fun create(
 
 fun search(text: String) {
 
-//    println("$text and ${tabulated.keys}")
-
     if (text !in tabulated.keys) return
-
-//    println("$text is in ${tabulated.keys}")
 
     mutableDisplay += tabulated[text]?.first as MutableSet<Attraction>
 
-//    println(mutableDisplay)
-
     names += tabulated[text]?.second as MutableSet<String>
-
-//    println(names)
 
 }
 
