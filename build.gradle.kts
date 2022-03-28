@@ -19,9 +19,9 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+
     testImplementation("org.slf4j:slf4j-log4j12:1.7.36")
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+
     implementation("org.slf4j:slf4j-api:1.7.36")
 
     implementation("org.reflections:reflections:0.10.2")
@@ -34,10 +34,5 @@ tasks.withType<KotlinCompile> {
 compose.desktop {
     application {
         mainClass = "io.github.mobomega.elc.MainKt"
-//        nativeDistributions {
-//            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-//            packageName = "untitled"
-//            packageVersion = "1.0.0"
-//        }
     }
 }

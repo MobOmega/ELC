@@ -8,6 +8,4 @@ abstract class Attraction {
     open val name: String = ""
     open val tags: Set<String> = setOf("")
 
-    val matches: (String) -> (Boolean) = { it in tags }
-
 }
